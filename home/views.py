@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import Client
 import bcrypt
+from django.db import IntegrityError
 from django.contrib import messages
 
 # Create your views here.
@@ -23,17 +24,20 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
         cpassword = request.POST['cpassword']
-
-        if password == cpassword:
-            myuser = User.objects.create_user(username=username, email=email, password=cpassword)
-            # myuser = User.objects.create_user(username,email,cpassword)
-            myuser.first_name = fname
-            myuser.last_name = lname
-            myuser.save()
-            # request.session['id'] = myuser.id
-            return redirect('/signin')
-        else:
-            messages.error(request, 'Passwords do not match')
+        
+        try:
+            if password == cpassword:
+                myuser = User.objects.create_user(username=username, email=email, password=cpassword)
+                # myuser = User.objects.create_user(username,email,cpassword)
+                myuser.first_name = fname
+                myuser.last_name = lname
+                myuser.save()
+                # request.session['id'] = myuser.id
+                return redirect('/signin')
+            else:
+                messages.error(request, 'Passwords do not match')
+        except IntegrityError as e:
+             return HttpResponse("Username is already exist")
     # return HttpResponse('Hello')
     return render(request, "authentication/signup.html")
 
@@ -45,8 +49,8 @@ def signin(request):
         cpassword = request.POST['cpassword']
 
         
-        if (User.objects.filter(email=email).exists()):
-            users = User.objects.filter(email=email)[0]
+        if (User.objects.filter(email=email, username=username).exists()):
+            users = User.objects.filter(email=email, username=username)[0]
             if (request.POST['cpassword'].encode(), users.password.encode()):
                 user = authenticate(email=email, username=username, password=cpassword)
                 if user is not None:
