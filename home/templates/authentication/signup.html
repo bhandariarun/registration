@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Signup</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <center><h1>Register</h1>
+        <form action='/' method='post'>
+            {% csrf_token %}
+            <label for="">User Name</label>
+            <br><br>
+            <input type="text" id="username" name="username" placeholder="Enter a user name" Required>
+            <br><br>
+            <label for="">First Name</label>
+            <br><br>
+            <input type="text" id="fname" name="fname" placeholder="Enter a first name" Required>
+            <br><br>
+            <label for="">Middle Name</label>
+            <br><br>
+            <input type="text" id="mname" name="mname" placeholder="Enter a middle name">
+            <br><br>
+            <label for="">Last Name</label>
+            <br><br>
+            <input type="text" id="lname" name="lname" placeholder="Enter a last name" Required>
+            <br><br>
+            <label for="">Phone number</label>
+            <br><br>
+            <input type="number" id="phone" name="phone" placeholder="Enter a Phone Number" Required>
+            <br><br>
+            <label for="">Email</label>
+            <br><br>
+            <input type="email" id="email" name="email" placeholder="Enter a Email" Required>
+            <br><br>
+            <label for="">Password</label>
+            <br><br>
+            <input type="password" id="password" name="password" placeholder="Enter a password" Required>
+            <br><br>
+            <label for="">Conform Password</label>
+            <br><br>
+            <input type="password" id="cpassword" name="cpassword" placeholder="Enter a password again" Required>
+            <br><br>
+            <button type="submit">Signup</button>
+        </form>
+        </center>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
